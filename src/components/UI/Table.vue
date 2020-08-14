@@ -11,9 +11,21 @@
         </thead>
         <tbody class="table__body">
           <tr v-for="(el, i) in type" :key="i">
-            <td class="table__amount"><span>{{ Math.floor(el[1]) }}</span></td>
-            <td class="table__price"><span>{{ el[0] }}</span></td>
-            <td class="table__total"><span>{{ Math.floor(el[1]) * el[0] }}</span></td>
+            <td class="table__amount">
+              <span>
+                {{ parseFloat(el[1]).toFixed(2) }}
+              </span>
+            </td>
+            <td class="table__price">
+              <span>
+                {{ parseFloat(el[0]).toFixed(7) }}
+              </span>
+            </td>
+            <td class="table__total">
+              <span>
+                {{ (parseFloat(el[1]) * parseFloat(el[0])).toFixed(7) }}
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -26,7 +38,7 @@ export default {
   name: 'Table',
   props: {
     type: Array
-  }
+  },
 }
 </script>
 
@@ -52,14 +64,14 @@ export default {
     thead {
       display: table;
       overflow: auto;
-      width: 100%
+      width: 100%;
+      box-shadow: 0 4px 2px -2px #dddddd;
     }
     tbody{
       display: block;
       height: calc(100vh - (98px + 82px));
       overflow: auto;
       width: 100%;
-      border-top: 1px solid rgba(0,0,0,0.2);
     }
     tbody tr:nth-child(2n){
       background-color: rgba(130,130,170,0.1);
@@ -82,17 +94,25 @@ export default {
       // padding: 1em 0;
       display: inline-block;
       width: 33.33% !important;
-      background: $dark-light;
+      background: #E8E8EC;
     }
   }
 }
 
 @media screen and (max-width: 895px) {
- .table__fixed {
-   tbody td {
-     width: 100%;
-   }
- }
+  .table {
+    &__fixed {
+      tbody td {
+        width: 100%;
+      }
+    }
+    &__total {
+      display: none !important;
+    }
+    thead th {
+      width: 50% !important;
+    }
+  }
 }
 
 </style>

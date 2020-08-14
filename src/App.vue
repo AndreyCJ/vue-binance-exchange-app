@@ -68,7 +68,7 @@ a {
 }
 
 @media screen and (max-width: 895px) {
-  .flex{
+  .flex-center{
     flex-wrap: wrap;
   }
 }

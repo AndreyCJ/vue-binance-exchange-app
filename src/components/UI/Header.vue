@@ -32,7 +32,8 @@
   &__item {
     margin-right: 1em;
     border-bottom: 2px solid $dark-light;
-    padding: 0.8em 0;
+    padding: 0.6em 0;
+    font-weight: 500;
     // padding: 1em .8em;
   }
   &__item:last-child {
@@ -44,6 +45,6 @@
 }
 
 .router-link-active {
-  border-bottom: 1px solid $light;
+  border-bottom: 2px solid $light;
 }
 </style>

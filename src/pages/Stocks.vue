@@ -1,36 +1,27 @@
 <template>
   <div class="container flex-center">
-    <Table :type="bids"/>
-    <Table :type="asks"/>
+    <Table :type="bids" v-if="!$myStore.state.loading"/>
+    <Table :type="asks" v-if="!$myStore.state.loading"/>
+    <Loader v-else/>
   </div>
 </template>
 
 <script>
 import Table from '@/components/UI/Table.vue';
+import Loader from '@/components/UI/Loader.vue';
 
 export default {
   name: 'Stocks',
   components: {
-    Table
+    Table,
+    Loader
   },
   computed: {
     bids() {
-      let bids = this.$myStore.state.bids;
-      // let updatedBids = this.$myStore.state.updatedBids;
-      // if(updatedBids.length) {
-        // const bidsCopy = [...bids];
-        // bidsCopy.forEach(pair => {
-        //   console.log(pair)
-        // })
-
-        // const bidsTest = new Set([...bidsCopy, ...updatedBids]);
-        // console.log(bidsCopy)
-      // }
-      return bids;
+      return this.$myStore.state.bids;
     },
     asks() {
-      const asks = this.$myStore.state.asks;
-      return asks;
+      return this.$myStore.state.asks;
     }
   }
 }
