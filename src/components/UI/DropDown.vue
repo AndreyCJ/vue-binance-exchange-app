@@ -1,8 +1,12 @@
 <template>
-  <div class="dropDown">
-    <select class="dropDown__select" v-model="sym">
+  <div class="drop-down">
+    <select
+      class="drop-down__select"
+      v-model="sym"
+      @change="handleClick(sym)"
+    >
       <option
-        class="dropDown__option"
+        class="drop-down__option"
         v-for="(option, i) in options"
         :key="i"
       >
@@ -20,9 +24,11 @@ export default {
       sym: this.$myStore.state.symbol
     }
   },
-  watch: {
-    sym(val) {
+  methods: {
+    handleClick(val) {
       this.$myStore.commit('setSymbol', val);
+      this.$myStore.commit('closeSocket');
+      this.$myStore.commit('clearUpdates');
       this.$myStore.dispatch('loadStocks', 100);
     }
   },
@@ -33,7 +39,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .dropDown {
-
+.drop-down {
+  &__select {
+    padding: 0.5em;
+    border: 1px solid #E8E8EC;
+    color: $light;
+    cursor: pointer;
   }
+  &__option {
+    color: $light;
+  }
+}
 </style>

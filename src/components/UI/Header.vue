@@ -17,13 +17,27 @@
           Лист
         </router-link>
       </nav>
+      <div class="stocks-header__currency">
+        <span>{{ this.$myStore.state.symbol }}</span>
+      </div>
     </div>
   </header>
 </template>
 
+<script>
+export default {
+  name: 'Header',
+}
+</script>
+
 <style lang="scss" scoped>
 .stocks-header {
   background: $dark-light;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &__menu {
     display: flex;
     justify-content: flex-start;
@@ -41,6 +55,10 @@
   }
   &__item:hover {
     border-bottom: 2px solid $light;
+  }
+  &__currency {
+    font-size: 0.9rem;
+    cursor: default;
   }
 }
 
