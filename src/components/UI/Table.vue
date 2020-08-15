@@ -102,6 +102,7 @@ export default {
 @media screen and (max-width: 895px) {
   .table {
     &__fixed {
+      max-width: 75vw;
       tbody td {
         width: 100%;
       }

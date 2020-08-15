@@ -7,14 +7,14 @@
           class="stocks-header__item"
           exact
         >
-          Таблица
+          Stocks
         </router-link>
         <router-link
           to="/list"
           class="stocks-header__item"
           exact
         >
-          Лист
+          Controls
         </router-link>
       </nav>
       <div class="stocks-header__currency">
