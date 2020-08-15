@@ -1,8 +1,8 @@
 <template>
   <div class="container flex-center">
-    <Table :type="bids" v-if="!$myStore.state.loading"/>
-    <Table :type="asks" v-if="!$myStore.state.loading"/>
-    <Loader v-else/>
+    <Table :type="bids" v-if="!$myStore.state.loading" />
+    <Table :type="asks" v-if="!$myStore.state.loading" />
+    <Loader v-else />
   </div>
 </template>
 

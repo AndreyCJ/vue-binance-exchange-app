@@ -10,7 +10,7 @@
           Stocks
         </router-link>
         <router-link
-          to="/list"
+          to="/controls"
           class="stocks-header__item"
           exact
         >

@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const Stocks = () => import(/* webpackChunkName: "Stocks" */ '../pages/Stocks.vue');
-const List = () => import(/* webpackChunkName: "list" */ '../pages/List.vue');
+const Controls = () => import(/* webpackChunkName: "Controls" */ '../pages/Controls.vue');
 
 const routes = [
   {
@@ -13,11 +13,15 @@ const routes = [
     component: Stocks
   },
   {
-    path: '/list',
-    name: 'List',
-    component: List
+    path: '/controls',
+    name: 'Controls',
+    component: Controls
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
-]
+];
 
 const router = new VueRouter({
   routes
