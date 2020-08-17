@@ -14,7 +14,7 @@ export default {
   name: 'Stocks',
   components: {
     Table,
-    Loader
+    Loader,
   },
   computed: {
     bids() {
@@ -22,11 +22,9 @@ export default {
     },
     asks() {
       return this.$myStore.state.asks;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

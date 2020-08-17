@@ -3,28 +3,30 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const Stocks = () => import(/* webpackChunkName: "Stocks" */ '../pages/Stocks.vue');
-const Controls = () => import(/* webpackChunkName: "Controls" */ '../pages/Controls.vue');
+const Stocks = () =>
+  import(/* webpackChunkName: "Stocks" */ '../pages/Stocks.vue');
+const Controls = () =>
+  import(/* webpackChunkName: "Controls" */ '../pages/Controls.vue');
 
 const routes = [
   {
     path: '/',
     name: 'Stocks',
-    component: Stocks
+    component: Stocks,
   },
   {
     path: '/controls',
     name: 'Controls',
-    component: Controls
+    component: Controls,
   },
   {
     path: '*',
-    redirect: '/'
-  }
+    redirect: '/',
+  },
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
 });
 
 export default router;

@@ -6,32 +6,28 @@
 </template>
 
 <script>
-import Header from '@/components/UI/Header.vue'
-import PageContainer from '@/components/UI/PageContainer.vue'
+import Header from '@/components/UI/Header.vue';
+import PageContainer from '@/components/UI/PageContainer.vue';
 
 export default {
   name: 'Core',
   components: {
     Header,
-    PageContainer
+    PageContainer,
   },
   created() {
     this.$myStore.dispatch('loadStocks', 100);
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-*, *::before,
+*,
+*::before,
 *::after {
   box-sizing: border-box;
-}
-
-html {
-  overflow-y: scroll;
-  overflow-y: overlay;
 }
 
 body {
@@ -60,7 +56,7 @@ a {
   max-width: 1290px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 .6em;
+  padding: 0 0.6em;
 }
 
 .flex-center {
@@ -70,7 +66,7 @@ a {
 }
 
 @media screen and (max-width: 895px) {
-  .flex-center{
+  .flex-center {
     flex-wrap: wrap;
   }
 }

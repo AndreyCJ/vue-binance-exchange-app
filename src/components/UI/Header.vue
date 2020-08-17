@@ -2,18 +2,10 @@
   <header class="stocks-header">
     <div class="container">
       <nav class="stocks-header__menu">
-        <router-link
-          to="/"
-          class="stocks-header__item"
-          exact
-        >
+        <router-link to="/" class="stocks-header__item" exact>
           Stocks
         </router-link>
-        <router-link
-          to="/controls"
-          class="stocks-header__item"
-          exact
-        >
+        <router-link to="/controls" class="stocks-header__item" exact>
           Controls
         </router-link>
       </nav>
@@ -27,7 +19,7 @@
 <script>
 export default {
   name: 'Header',
-}
+};
 </script>
 
 <style lang="scss" scoped>

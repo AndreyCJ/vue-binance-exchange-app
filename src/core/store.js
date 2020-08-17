@@ -12,7 +12,7 @@ export default new Vuex.Store({
     updates: [],
     asks: [],
     symbol: 'BNBBTC',
-    socket: null
+    socket: null,
   },
   actions: {
     async loadStocks({ commit, dispatch, state }, limit = 500) {
@@ -40,10 +40,10 @@ export default new Vuex.Store({
       let index = 0;
 
       const initWsConnection = (socket) => {
-        socket.onopen = event => { 
+        socket.onopen = (event) => {
           console.log('Successufly conected to ws', event);
-        }
-        socket.onmessage = event => {
+        };
+        socket.onmessage = (event) => {
           index++;
           data.push(JSON.parse(event.data));
           currentEvent = data[index - 1];
@@ -51,26 +51,28 @@ export default new Vuex.Store({
 
           if (index === 1) {
             if (
-              data.U <= (state.lastUpdateID + 1)
-              && data.u >= (state.lastUpdateID + 1)
+              data.U <= state.lastUpdateID + 1 &&
+              data.u >= state.lastUpdateID + 1
             ) {
               commit('setLastUpdateID', data.u);
               dispatch('processUpdates', currentEvent);
             }
-          } else if (currentEvent.U === (prevEvent.u + 1)) {
+          } else if (currentEvent.U === prevEvent.u + 1) {
             commit('setLastUpdateID', prevEvent.u);
             dispatch('processUpdates', currentEvent);
-          } 
-        }
+          }
+        };
       };
-      state.socket = new WebSocket(`wss://stream.binance.com:9443/ws/${state.symbol.toLowerCase()}@depth`);
+      state.socket = new WebSocket(
+        `wss://stream.binance.com:9443/ws/${state.symbol.toLowerCase()}@depth`
+      );
       initWsConnection(state.socket);
     },
     processUpdates({ commit }, data) {
-      data.b.forEach(update => {
+      data.b.forEach((update) => {
         commit('manageStocks', ['bids', update]);
       });
-      data.a.forEach(update => {
+      data.a.forEach((update) => {
         commit('manageStocks', ['asks', update]);
       });
     },
@@ -84,7 +86,7 @@ export default new Vuex.Store({
 
       for (let i = 0; i < filteredStocks.length; i++) {
         if (price === filteredStocks[i][0]) {
-          if (amount === "0.00000000") {
+          if (amount === '0.00000000') {
             filteredStocks[i].slice(0, 0);
             state.updates.push(`Removed: [${price}, ${amount}]`);
             break;
@@ -94,10 +96,12 @@ export default new Vuex.Store({
             state.updates.push(`Updated: [${price}, ${amount}]`);
             break;
           }
-        } 
-        if ((price > filteredStocks[i][0] && type === 'bids') ||
-            (price < filteredStocks[i][0] && type === 'asks')){
-          if (amount !== "0.00000000") {
+        }
+        if (
+          (price > filteredStocks[i][0] && type === 'bids') ||
+          (price < filteredStocks[i][0] && type === 'asks')
+        ) {
+          if (amount !== '0.00000000') {
             filteredStocks[i][0] = price;
             filteredStocks[i][1] = amount;
             state.updates.push(`New price: ${price} -> ${amount}`);
@@ -110,7 +114,7 @@ export default new Vuex.Store({
 
       if (type === 'asks') {
         state.asks = filteredStocks;
-      } else if (type === 'bids'){
+      } else if (type === 'bids') {
         state.bids = filteredStocks;
       }
     },
@@ -143,11 +147,11 @@ export default new Vuex.Store({
     },
     clearUpdates(state) {
       state.updates.splice(0, state.updates.length);
-    }
+    },
   },
   getters: {
     getStocks(state) {
       return state.stocks;
-    }
+    },
   },
 });

@@ -37,13 +37,12 @@
 export default {
   name: 'Table',
   props: {
-    type: Array
+    type: Array,
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-
 .table {
   &__container {
     width: 100%;
@@ -55,28 +54,35 @@ export default {
       background-color: transparent;
       transition: background-color 1s;
     }
+    :hover::-webkit-scrollbar-thumb {
+      background-color: $light;
+    }
+
     table-layout: fixed;
     width: 100%;
     border-spacing: 0;
-    :hover::-webkit-scrollbar-thumb{
-      background-color: $light;
-    }
     thead {
       display: table;
       overflow: auto;
       width: 100%;
       box-shadow: 0 4px 2px -2px #dddddd;
     }
-    tbody{
+    tbody {
       display: block;
       height: calc(100vh - (98px + 82px));
-      overflow: auto;
       width: 100%;
+      overflow-y: scroll;
+      border: none;
+      scrollbar-color: transparent transparent;
+      scrollbar-width: thin;
     }
-    tbody tr:nth-child(2n){
-      background-color: rgba(130,130,170,0.1);
+    tbody:hover {
+      scrollbar-color: auto;  
     }
-    tbody tr { 
+    tbody tr:nth-child(2n) {
+      background-color: rgba(130, 130, 170, 0.1);
+    }
+    tbody tr {
       width: 100%;
       display: flex;
     }
@@ -85,16 +91,16 @@ export default {
       overflow-wrap: break-word;
       width: 100% !important;
     }
-    th, td {
+    th,
+    td {
       padding: 1em;
-      text-align:left;
+      text-align: left;
     }
 
     thead th {
-      // padding: 1em 0;
       display: inline-block;
       width: 33.33% !important;
-      background: #E8E8EC;
+      background: #e8e8ec;
     }
   }
 }
@@ -115,5 +121,4 @@ export default {
     }
   }
 }
-
 </style>

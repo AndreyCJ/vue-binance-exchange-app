@@ -1,26 +1,17 @@
 <template>
   <div class="list-element">
-    <ul
-      class="list-element__ul"
-      ref="elementUl"
-    >
+    <ul class="list-element__ul" ref="elementUl">
       <li
         class="list-element__li list-element__li--empty"
         v-if="updates[0] === undefined"
       >
         Updates list empty...
       </li>
-      
-      <li
-        class="list-element__li"
-        v-else
-        v-for="(el, i) in updates"
-        :key="i"
-      >
+
+      <li class="list-element__li" v-else v-for="(el, i) in updates" :key="i">
         {{ el }}
       </li>
     </ul>
-
   </div>
 </template>
 
@@ -29,31 +20,35 @@ export default {
   name: 'ListElement',
   data() {
     return {
-      updates: this.$myStore.state.updates
-    }
+      updates: this.$myStore.state.updates,
+    };
   },
   watch: {
     updates() {
       if (this.updates.length > 500) {
-        this.updates.splice(0, 500)
+        this.updates.splice(0, 500);
       }
       const container = this.$refs.elementUl;
       container.scrollTo(0, container.scrollHeight);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .list-element {
+  scrollbar-color: transparent transparent;
   ::-webkit-scrollbar-thumb {
     background-color: transparent;
     transition: background-color 1s;
   }
-  :hover::-webkit-scrollbar-thumb{
+  :hover::-webkit-scrollbar-thumb {
     background-color: $light;
   }
-  border: 1px solid #E8E8EC;
+  :hover {
+    scrollbar-color: auto;
+  }
+  border: 1px solid #e8e8ec;
   padding: 1em;
   background: #fff;
   &__ul {

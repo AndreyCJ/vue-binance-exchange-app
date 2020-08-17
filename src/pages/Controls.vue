@@ -17,21 +17,21 @@ export default {
   name: 'List',
   data() {
     return {
-      options: ['BTCUSDT', 'BNBBTC', 'ETHBTC']
-    }
+      options: ['BTCUSDT', 'BNBBTC', 'ETHBTC'],
+    };
   },
   components: {
     DropDown,
-    ListElement
-  }
-}
+    ListElement,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .list-page {
   max-width: 720px;
   margin: 2em auto 0 auto;
-  &__list-element{
+  &__list-element {
     margin-top: 1em;
   }
 }
