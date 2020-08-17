@@ -43,7 +43,7 @@ export default {
     transition: background-color 1s;
   }
   :hover::-webkit-scrollbar-thumb {
-    background-color: $light;
+    background-color: $dark-bold;
   }
   :hover {
     scrollbar-color: auto;
