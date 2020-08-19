@@ -25,10 +25,8 @@ export default {
   },
   watch: {
     updates() {
-      if (this.updates.length > 50) {
-        const lastUpdate = this.updates[this.updates.length - 1];
-        this.updates.length = 0;
-        this.updates[0] = lastUpdate;
+      if (this.updates.length > 100) {
+        this.$store.commit('clearUpdates');
       }
       const container = this.$refs.elementUl;
       container.scrollTo(0, container.scrollHeight);
