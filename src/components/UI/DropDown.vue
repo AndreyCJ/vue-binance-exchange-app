@@ -1,7 +1,7 @@
 <template>
   <div class="drop-down">
-    <select class="drop-down__select" v-model="sym" @change="handleClick(sym)">
-      <option class="drop-down__option" v-for="(option, i) in options" :key="i">
+    <select class="drop-down__select" v-model="$store.state.symbol" @change="handleClick($store.state.symbol)">
+      <option class="drop-down__option" v-for="(option, i) in $store.state.options" :key="i">
         {{ option }}
       </option>
     </select>
@@ -11,21 +11,13 @@
 <script>
 export default {
   name: 'DropDown',
-  data() {
-    return {
-      sym: this.$myStore.state.symbol,
-    };
-  },
   methods: {
     handleClick(val) {
-      this.$myStore.commit('setSymbol', val);
-      this.$myStore.commit('closeSocket');
-      this.$myStore.commit('clearUpdates');
-      this.$myStore.dispatch('loadStocks', 100);
+      this.$store.commit('setSymbol', val);
+      this.$store.commit('closeSocket');
+      this.$store.commit('clearUpdates');
+      this.$store.dispatch('loadStocks', 100);
     },
-  },
-  props: {
-    options: Array,
   },
 };
 </script>

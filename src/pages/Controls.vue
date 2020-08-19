@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="list-page">
-      <DropDown :options="options" />
+      <DropDown :options="$store.state.options" />
       <div class="list-page__list-element">
         <ListElement />
       </div>
@@ -15,11 +15,6 @@ import ListElement from '@/components/UI/ListElement.vue';
 
 export default {
   name: 'List',
-  data() {
-    return {
-      options: ['BTCUSDT', 'BNBBTC', 'ETHBTC'],
-    };
-  },
   components: {
     DropDown,
     ListElement,

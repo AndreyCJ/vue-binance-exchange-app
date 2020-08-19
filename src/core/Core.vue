@@ -1,22 +1,30 @@
 <template>
   <div id="app">
-    <Header />
-    <PageContainer />
+    <div class="error error--block flex-center" v-if="$store.state.errors.api">
+      <span>{{ $store.state.errors.api }}</span>
+    </div>
+    <div v-else>
+      <Header />
+      <PageContainer />
+    </div>
   </div>
 </template>
 
 <script>
+import store from '@/core/store.js';
+
 import Header from '@/components/UI/Header.vue';
 import PageContainer from '@/components/UI/PageContainer.vue';
 
 export default {
   name: 'Core',
+  store,
   components: {
     Header,
     PageContainer,
   },
   created() {
-    this.$myStore.dispatch('loadStocks', 100);
+    this.$store.dispatch('loadStocks', 100);
   },
 };
 </script>
@@ -54,6 +62,7 @@ a {
 
 .container {
   max-width: 1290px;
+  position: relative;
   width: 100%;
   margin: 0 auto;
   padding: 0 0.6em;
@@ -65,18 +74,35 @@ a {
   align-items: center;
 }
 
-@media screen and (max-width: 895px) {
-  .flex-center {
-    flex-wrap: wrap;
-  }
-}
-
 ::-webkit-scrollbar {
   width: 6px;
   position: absolute;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: $light;
+  background-color: $dark-bold;
   border-radius: 3px;
+}
+
+.error {
+  padding: 5px;
+  background: crimson;
+  color: #f4f4f4;
+  &--block {
+    position: relative;
+  }
+  &--popup {
+    position: absolute;
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    left: 0px;
+    bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 895px) {
+  .flex-center {
+    flex-wrap: wrap;
+  }
 }
 </style>

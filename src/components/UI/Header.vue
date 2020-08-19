@@ -10,7 +10,7 @@
         </router-link>
       </nav>
       <div class="stocks-header__currency">
-        <span>{{ this.$myStore.state.symbol }}</span>
+        <span>{{ this.$store.state.symbol }}</span>
       </div>
     </div>
   </header>

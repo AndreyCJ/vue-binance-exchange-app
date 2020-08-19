@@ -20,13 +20,15 @@ export default {
   name: 'ListElement',
   data() {
     return {
-      updates: this.$myStore.state.updates,
+      updates: this.$store.state.updates,
     };
   },
   watch: {
     updates() {
-      if (this.updates.length > 500) {
-        this.updates.splice(0, 500);
+      if (this.updates.length > 50) {
+        const lastUpdate = this.updates[this.updates.length - 1];
+        this.updates.length = 0;
+        this.updates[0] = lastUpdate;
       }
       const container = this.$refs.elementUl;
       container.scrollTo(0, container.scrollHeight);
