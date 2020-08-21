@@ -1,4 +1,4 @@
-async function loadStocks({ commit, dispatch, state }, limit = 500) {
+async function loadStocks({ commit, state }, limit = 500) {
   try {
     commit('loading', true);
 
@@ -12,7 +12,6 @@ async function loadStocks({ commit, dispatch, state }, limit = 500) {
     commit('loading', false);
 
     commit('setLastUpdateID', data.lastUpdateId);
-    dispatch('subscribeToUpdates');
     commit('setBids', bids);
     commit('setAsks', asks);
     commit('setStocks', { ...data });
@@ -30,14 +29,13 @@ function subscribeToUpdates({ commit, dispatch, state }) {
   let currentEvent = null;
   let prevEvent = null;
   let index = 0;
-  state.socket = new WebSocket(
-    `wss://stream.binance.com:9443/ws/${state.symbol.toLowerCase()}@depth`
-  );
 
-  const initWsConnection = (socket) => {
-    socket.onopen = (event) => {
-      console.log('Successufly conected to ws', event);
-    };
+  const initWsConnection = () => {
+    state.socket = new WebSocket(
+      `wss://stream.binance.com:9443/ws/${state.symbol.toLowerCase()}@depth`
+    );
+    const socket = state.socket;
+
     socket.onmessage = (event) => {
       index++;
       data.push(JSON.parse(event.data));
@@ -57,6 +55,9 @@ function subscribeToUpdates({ commit, dispatch, state }) {
         dispatch('processUpdates', currentEvent);
       }
     };
+    socket.onclose = () => {
+      initWsConnection();
+    };
     socket.onerror = (event) => {
       commit('setError', {
         msg: 'При обновлении данных произошла ошибка, обновите страницу',
@@ -65,7 +66,7 @@ function subscribeToUpdates({ commit, dispatch, state }) {
       console.log('Websocket error: ', event);
     };
   };
-  initWsConnection(state.socket);
+  initWsConnection();
 }
 
 export default { loadStocks, subscribeToUpdates };

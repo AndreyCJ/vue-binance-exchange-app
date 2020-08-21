@@ -14,9 +14,9 @@ export default {
   methods: {
     handleClick(val) {
       this.$store.commit('setSymbol', val);
-      this.$store.commit('closeSocket');
-      this.$store.commit('clearUpdates');
       this.$store.dispatch('loadStocks', 100);
+      this.$store.commit('closeSocket');
+      this.$store.commit('resetUpdates');
     },
   },
 };

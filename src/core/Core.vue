@@ -25,6 +25,7 @@ export default {
   },
   created() {
     this.$store.dispatch('loadStocks', 100);
+    this.$store.dispatch('subscribeToUpdates');
   },
 };
 </script>

@@ -68,8 +68,11 @@ export default {
   },
   clearUpdates(state) {
     const lastUpdate = state.updates[state.updates.length - 1];
-    state.updates.length = 0;
+    state.updates.splice(0, state.updates.length);
     state.updates[0] = lastUpdate;
+  },
+  resetUpdates(state) {
+    state.updates.splice(0, state.updates.length);
   },
   setError(state, { msg, target }) {
     state.errors[target] = msg;

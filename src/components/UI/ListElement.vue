@@ -3,9 +3,9 @@
     <ul class="list-element__ul" ref="elementUl">
       <li
         class="list-element__li list-element__li--empty"
-        v-if="updates[0] === undefined"
+        v-if="updates.length === 0"
       >
-        Updates list empty...
+        Updates loading...
       </li>
 
       <li class="list-element__li" v-else v-for="(el, i) in updates" :key="i">
@@ -25,7 +25,7 @@ export default {
   },
   watch: {
     updates() {
-      if (this.updates.length > 100) {
+      if (this.updates.length > 500) {
         this.$store.commit('clearUpdates');
       }
       const container = this.$refs.elementUl;
